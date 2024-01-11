@@ -31,6 +31,10 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     },
     plugins: [
       vue(),
+      viteMockServe({
+        mockPath: 'mock',
+        localEnabled: command === 'serve',
+      }),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ['vue'],
@@ -61,12 +65,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       }),
 
       Inspect(),
-
-      viteMockServe({
-        mockPath: 'mock',
-        enable: true,
-        localEnabled: command === 'serve',
-      }),
     ],
   }
 }
